@@ -108,7 +108,7 @@ map.on('load', function() {
       if (features[i].layer.id == 'us-tract10i-b9dicn') {
         new mapboxgl.Popup()
           .setLngLat(e.lngLat)
-          .setHTML('Change in Low Income Households1: ' + features[i].properties.ChngLow2 + '<br/>')
+          .setHTML('Change in Low Income Households: ' + features[i].properties.ChngLow2 + '<br/>')
           .addTo(map);
         return;
       }
