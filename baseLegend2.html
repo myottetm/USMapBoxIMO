@@ -100,7 +100,7 @@ map.on('load', function() {
       if (features[i].layer.id == 'CensusTracts') {
         new mapboxgl.Popup()
           .setLngLat(e.lngLat)
-          .setHTML('Change in Low Income Households' + '<br/>within Gentrifying or Concentrating Tracts: ' + features[i].properties.ChngLow2 + '<br/>2016 Population as Share of 2000 Population: ' + features[i].properties.Pop16share + '<br/>Low Income Share in 2000: ' + features[i].properties.LowIncShar + '<br/>Low Income Share in 2016: ' + features[i].properties.LowIncSh_1 + '</br>Population Change for:' + '<br/>Extreme Poverty HHs: ' + features[i].properties.ChngExPov)
+          .setHTML('Change in Low Income Households' + '<br/>within Gentrifying or Concentrating Tracts: ' + features[i].properties.ChngLow2 + '<br/>2016 Population as Share of 2000 Population: ' + features[i].properties.Pop16share + '<br/>Low Income Share in 2000: ' + features[i].properties.LowIncShar + '<br/>Low Income Share in 2016: ' + features[i].properties.LowIncSh_1 + '</br><u>Population Change for:</u>' + '<br/>Extreme Poverty HHs: ' + features[i].properties.ChngExPov)
           .addTo(map);
         return;
       }
