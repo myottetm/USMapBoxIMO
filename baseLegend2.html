@@ -2,7 +2,7 @@
 <html>
 <head>
   <meta charset='utf-8' />
-  <title>Display a map</title>
+  <title>Strong Gentrification and Concentration of Low Income</title>
   <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
   <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
   <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
@@ -108,7 +108,7 @@ map.on('load', function() {
       if (features[i].layer.id == 'us-tract10i-b9dicn') {
         new mapboxgl.Popup()
           .setLngLat(e.lngLat)
-          .setHTML('County: ' + features[i].properties.CountyName + '<br/>Change Low: ' + features[i].properties.ChngLow2)
+          .setHTML('<h3>' + feature.properties.title + '</h3><p>' + features[i].properties.ChngLow2 + '</p>')
           .addTo(map);
         return;
       }
