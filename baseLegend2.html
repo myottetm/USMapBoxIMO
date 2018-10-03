@@ -95,7 +95,7 @@ map.on('load', function() {
     legend.appendChild(item);
   }
   map.on('click', function (e) {
-    var features = map.queryRenderedFeatures(e.point);
+    var features = map.queryRenderedFeatures(e.point, { layers: ['CensusTracts'] });
     for (i in features) {
       if (features[i].layer.id == 'CensusTracts') {
         new mapboxgl.Popup()
@@ -107,7 +107,7 @@ map.on('load', function() {
     }
      map.setFilter("CensusTracts-highlighted", filter)
   });
-  map.getCanvas().style.cursor = 'default';
+     map.getCanvas().style.cursor = 'default';
 });
 </script>
 
