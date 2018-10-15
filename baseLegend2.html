@@ -63,14 +63,22 @@ p {
       font: 11px/18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
     }
     .sidebar {
-      width: 33.3333%;
+          position:absolute;
+          width:20%;
+          height:100%;
+          top:0;left:0;
+          overflow:hidden;
+          border-right:1px solid rgba(0,0,0,0.25);
     }
   </style>
 </head>
 <body>
 
 <div id='map'></div>
-<div class='sidebar pad2'>Listing</div>
+<div class='sidebar'>
+  <div class='heading'>
+    <h1>Our Locations</h1>
+  </div>
 <div class='map-overlay' id='legend'><p><b>Net Change in Number<br>of Low Income Persons</b></p></div>
 <div class='map-overlay' id='features'><h2>Gentrification and Low Income Concentration<br>in U.S. Census Tracts, 2000 to 2016</h2></div>
 
