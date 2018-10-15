@@ -62,7 +62,14 @@ p {
       max-width: 400px;
       font: 11px/18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
     }
-
+     .sidebar {
+       position:absolute;
+       width: 20%;
+       height:100%;
+       top:0;left:0;
+       overflow:hidden;
+       border-right:1px solid rgba(255, 255, 255, 0.8);
+    }
   </style>
 </head>
 <body>
@@ -75,14 +82,7 @@ p {
     <h2>Notes:</h2>
   </div>
   
-     .sidebar {
-       position:absolute;
-       width: 20%;
-       height:100%;
-       top:0;left:0;
-       overflow:hidden;
-       border-right:1px solid rgba(255, 255, 255, 0.8);
-    }
+
 
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoibXlvdHRldG0iLCJhIjoiY2psem4xMWJxMjNlcDN2cDQxd25tMDNhMCJ9.Hn5l5XlTMzKQv_m2lg394Q';
