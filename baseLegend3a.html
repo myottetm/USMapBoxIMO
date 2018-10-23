@@ -21,9 +21,10 @@
   -moz-box-sizing: border-box;
    box-sizing: border-box;
     h2,
-h3 {
+h1 {
+  font-size:22px;
   margin: 10px;
-  font-size: 1.2em;
+  font-weight:400;
 }
 h3 {
   font-size: 1em;
@@ -33,15 +34,33 @@ p {
   margin: 10px;
   text-align: left;
 }
-    #map { position:absolute; top:0; bottom:0; width:100%; }
+  
+    .sidebar {
+      position:absolute;
+      width: 20%;
+      height:100%;
+      top:0;left:0;
+      overflow:hidden;
+      border-right:1px solid rgba(255, 255, 255, 0.8);
+    }
+    .pad2 {
+      padding: 20px;
+    }
+    .quiet {
+      color: #888;
+    }
+  
+    #map {
+     position:absolute;
+     left:20%;
+     width:80%;
+     top:0;bottom:0;
     /**
     * Set rules for how the map overlays
     * (info box and legend) will be displayed
     * on the page. */
     .map-overlay {
       position: absolute;
-      left: 20%;
-      width: 80%;
       top: 0;
       bottom: 0;
       background: rgba(255, 255, 255, 0.8);
@@ -74,20 +93,7 @@ p {
       max-width: 400px;
       font: 11px/18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
     }
-     .sidebar {
-       position:absolute;
-       width: 20%;
-       height:100%;
-       top:0;left:0;
-       overflow:hidden;
-       border-right:1px solid rgba(255, 255, 255, 0.8);
-    }
-    .pad2 {
-      padding: 20px;
-    }
-    .quiet {
-      color: #888;
-    }
+
   </style>
 </head>
 <body>
@@ -100,8 +106,6 @@ p {
     <h2>Notes:</h2>
   </div>
   
-
-
 <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoibXlvdHRldG0iLCJhIjoiY2psem4xMWJxMjNlcDN2cDQxd25tMDNhMCJ9.Hn5l5XlTMzKQv_m2lg394Q';
 const map = new mapboxgl.Map({
