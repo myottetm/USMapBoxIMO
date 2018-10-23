@@ -93,7 +93,13 @@ p {
     <p>these are notes about the report and data these are notes about the report and data these are notes about the report and data these are notes about the report and data these are notes about the report and data these are notes about the report and date </p>
   <script>
 mapboxgl.accessToken = 'pk.eyJ1IjoibXlvdHRldG0iLCJhIjoiY2psem4xMWJxMjNlcDN2cDQxd25tMDNhMCJ9.Hn5l5XlTMzKQv_m2lg394Q';
-const map = new mapboxgl.Map({
+
+sidebar.on('load', function() {
+    sidebar.loadImage('https://myottetm.github.io/USMapBoxIMO/law.metro.logo.stckd.png', function(error, image) {
+       if (error) throw error;
+        sidebar.addImage('logo', image);
+      
+ const map = new mapboxgl.Map({
   container: 'map',
   style: 'mapbox://styles/myottetm/cjlz7h54v01cz2rp0m5k80qqv',
   center: [-88.588443, 38.464226],
