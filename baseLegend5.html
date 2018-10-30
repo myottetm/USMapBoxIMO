@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset='utf-8' />
+  <title>Gentrification and Concentration of Low Income</title>
+  <meta name='viewport' content='initial-scale=1,maximum-scale=1,user-scalable=no' />
+  <script src='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.js'></script>
+  <link href='https://api.tiles.mapbox.com/mapbox-gl-js/v0.46.0/mapbox-gl.css' rel='stylesheet' />
+
+  <style>
+    body { margin:0; padding:0; }
+    h2,
+h3 {
+  margin: 10px;
+  font-size: 1.2em;
+}
+h4 {
+  font-size: 1.0em;
+  margin: 10px;
+  text-align: left;
+}
+p {
+  font-size: 0.85em;
+  margin: 10px;
+  text-align: left;
+ }
+
+  #sidebar {
+      position:absolute;
+      width:20%;
+      height:100%;
+      top:0;left:0;
+      overflow: auto;
+      border-right:1px solid rgba(0,0,0,0.25);
+
+  }
+  .pad2 {
+    padding:20px;
+   }
+
+    #map { position:absolute; left: 20%; width: 80%; top:0; bottom:0; width:100%; }
+    /**
+    * Set rules for how the map overlays
+    * (info box and legend) will be displayed
+    * on the page. */
+    .map-overlay {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      background: rgba(255, 255, 255, 0.8);
+      margin-right: 20px;
+      font-family: Arial, sans-serif;
+      overflow: auto;
+      border-radius: 3px;
+    }
+    #features {
+      top: 0;
+      height: 70px;
+      margin-top: 10px;
+      width: 450px;
+    }
+    #legend {
+      padding: 5px;
+      box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+      line-height: 18px;
+      height: 350px;
+      margin-bottom: 40px;
+      width: 190px;
+    }
+    .legend-key {
+      display: inline-block;
+      border-radius: 20%;
+      width: 10px;
+      height: 10px;
+      margin-right: 20px;
+    }
+    .mapboxgl-popup {
+      max-width: 400px;
+      font: 11px/18px 'Helvetica Neue', Arial, Helvetica, sans-serif;
+    }
+
+  </style>
+</head>
+<body>
+
+<div id='map'></div>
+<div class='map-overlay' id='legend'><p><b>Net Change in Number<br>of Low Income Persons within Gentrifying or Concentrating Tracts</b></p></div>
+<div class='map-overlay' id='features'><h2>Gentrification and Low Income Concentration<br>in U.S. Census Tracts, 2000 to 2016</h2></div>
+<div class='sidebar'>
+   <div id='sidebar'>
+  <div class='gallery'>
+    <a target="_blank" href='logo.jpg'>
+    <img src='https://myottetm.github.io/USMapBoxIMO/law.metro.logo.stckd.png' alt="Institute on Metropolitan Opportunity" width=100% height=100%></a>
+  <div class='heading'>
+    <h3>Notes:</h3>
+    <p>these are notes about the report and data these are notes about the report and data these are notes about the report and data these are notes about the report and data these are notes about the report and data these are notes about the report and datee2s </p></div>
+
+    <script>
+mapboxgl.accessToken = 'pk.eyJ1IjoibXlvdHRldG0iLCJhIjoiY2psem4xMWJxMjNlcDN2cDQxd25tMDNhMCJ9.Hn5l5XlTMzKQv_m2lg394Q';
+
+ const map = new mapboxgl.Map({
+  container: 'map',
+  style: 'mapbox://styles/myottetm/cjnp109w41s1o2so9pyj5m8gs',
+  center: [-88.588443, 38.464226],
+  zoom: 4.1
+});
+var clickedStateId =  null;
+var popup = null;
+
+map.on('load', function() {
+  // the rest of the code will go in here
+  var layers = ['< -1,400', '-1,400 to -1,050', '-1,050 to -700', '-700 to -350', '-350 to -1', 'None', '1 to 350', '350 to 700','700 to 1,050','1,050 to 1,400','> 1,400','','Non-Metro Area'];
+  var colors = ['#002673', '#0067E6', '#26A6FF', '#80D9FF', '#CCF2FF', '#FFFFFF', '#FFE6BF', '#FFB399', '#FF804D', '#FF0000', '#730000','#f2f2f2','#C0C0C0'];
+  for (i = 0; i < layers.length; i++) {
+    var layer = layers[i];
+    var color = colors[i];
+    var item = document.createElement('div');
+    var key = document.createElement('span');
+    key.className = 'legend-key';
+    key.style.backgroundColor = color;
+    var value = document.createElement('span');
+    value.innerHTML = layer;
+    item.appendChild(key);
+    item.appendChild(value);
+    legend.appendChild(item);
+  }
+  map.on('click', function (e) {
+    var features = map.queryRenderedFeatures(e.point, { layers: ['CensusTracts'] });
+    for (i in features) {
+      if (features[i].layer.id == 'CensusTracts') {
+        popup = new mapboxgl.Popup()
+          .setLngLat(e.lngLat)
+          .setHTML('2016 Population as % Share of 2000 Population:  ' + ((features[i].properties.Pop16share)*100).toFixed(1) + '<br/>Low Income % in 2000:  ' + ((features[i].properties.LowIncShar)*100).toFixed(1) + '<br/>Low Income % in 2016:  ' + ((features[i].properties.LowIncSh_1)*100).toFixed(1) + '<br/> ' + '</br><b>Change for Subgroups:</b>' + '<br/>Low Income:  ' + features[i].properties.ChngLowInc + '<br/>Extreme Poverty:  ' + features[i].properties.ChngExPov + '<br/>Below Poverty:  ' + features[i].properties.ChngPov  + '<br/> ' + '<br/>Asian:  ' + features[i].properties.ChngAsn + '<br/>Black:  ' + features[i].properties.ChngBlk + '<br/>Hispanic:  ' + features[i].properties.ChngHisp + '<br/>White:  ' + features[i].properties.ChngWht  + '<br/> ' + '<br/>College, Non-graduate:  ' + features[i].properties.ChngNoColl + '<br/>College, Graduate:  ' + features[i].properties.ChngColGra  + '<br/> ' + '<br/>Ages Under 18:  ' + features[i].properties.ChngU18 + '<br/>Ages 18 to 34:  ' + features[i].properties.ChngA18t34 + '<br/>Ages 35 to 64:  ' + features[i].properties.Chng35t64 + '<br/>Ages 65 or more:  ' + features[i].properties.ChngeA65  + '<br/> ' + '<br/>Foreign-Born:  ' + features[i].properties.ChngForBrn + '<br/>U.S.-Born:  ' + features[i].properties.ChngUSbrn  + '<br/> ' + '<br/>Owner Units:  ' + features[i].properties.ChngOwn + '<br/>Rental Units:  ' + features[i].properties.ChngRent + '<br/>Vacant Units:  ' + features[i].properties.ChngVac  + '<br/> ' + '<br/>State-County-Tract ID: ' + features[i].properties.GEOID)
+          .on('close', function(e){
+            if (clickedStateId &&  this._clickedStateId == clickedStateId) {
+               map.setFeatureState({sourceLayer: 'US_tract10i-b9dicn', id: clickedStateId, source:"composite"}, {"click":false})
+            }
+          })
+          .addTo(map);
+
+        if (clickedStateId) {
+           map.setFeatureState({sourceLayer: 'US_tract10i-b9dicn', id: clickedStateId, source:"composite"}, {"click":false})
+        }
+
+        clickedStateId = features[i].id;
+        map.setFeatureState({sourceLayer: 'US_tract10i-b9dicn', id: clickedStateId, source:"composite"}, {"click":true})
+        popup._clickedStateId = clickedStateId
+        return;
+      }
+    }
+  });
+     map.getCanvas().style.cursor = 'default';
+});
+</script>
+</body>
+  </html>
