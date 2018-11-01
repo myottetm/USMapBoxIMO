@@ -109,6 +109,8 @@ mapboxgl.accessToken = 'pk.eyJ1IjoibXlvdHRldG0iLCJhIjoiY2psem4xMWJxMjNlcDN2cDQxd
   zoom: 4.1
 });
 var clickedStateId =  null;
+var tooltip =  null;
+      
 map.on('load', function() {
   // the rest of the code will go in here
   var layers = ['< -1,400', '-1,400 to -1,050', '-1,050 to -700', '-700 to -350', '-350 to -1', 'None', '1 to 350', '350 to 700','700 to 1,050','1,050 to 1,400','> 1,400','','Non-Metro Area'];
